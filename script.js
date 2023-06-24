@@ -1,79 +1,74 @@
-/** @format */
+// Fetch data from the API using .then
+fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false')
+  .then(response => response.json())
+  .then(data => renderTable(data))
+  .catch(error => console.error('Error:', error));
 
-let arr = [
-  { id: 1, name: "john", age: "18", profession: "developer" },
-  { id: 2, name: "jack", age: "20", profession: "developer" },
-  { id: 3, name: "karen", age: "19", profession: "admin" },
-];
+// Fetch data from the API using async/await
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false');
+    const data = await response.json();
+    renderTable(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
-function PrintDeveloperbyMap() {
-  //Write your code here , just console.log
-  arr.map((element) => {
-    if (element.profession === "developer") {
-      console.log(element);    }
+// Render the table
+function renderTable(data) {
+  const tableBody = document.getElementById('cryptoTableBody');
+
+  // Clear previous table data
+  tableBody.innerHTML = '';
+
+  // Iterate over the data and create table rows
+  data.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><img src="${item.image}" alt="${item.name}"></td>
+      <td>${item.name}</td>
+      <td>${item.id}</td>
+      <td>${item.symbol.toUpperCase()}</td>
+      <td>$${item.current_price}</td>
+      <td>$${item.total_volume}</td>
+      <td style="color: green">${item.market_cap_change_percentage_24h.toFixed(2)}%</td>
+      <td>Mkt Cap: $${item.market_cap}</td>
+    `;
+    tableBody.appendChild(row);
   });
-
-  /*
-      const array = [1, 2, 3, 4, 5];
-
-      const result = array.map((element) => {
-        // Transform the element and return the desired data
-        return element * 2;
-      });
-
-      console.log(result); // Output: [2, 4, 6, 8, 10]
-  */
 }
 
-function PrintDeveloperbyForEach() {
-  //Write your code here , just console.log
+// Search functionality
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', () => {
+  const searchInput = document.getElementById('searchInput');
+  const searchTerm = searchInput.value.toLowerCase();
 
-  arr.forEach((element) => {
+  // Filter the data based on the search term
+  const filteredData = responseData.filter(item =>
+    item.name.toLowerCase().includes(searchTerm) ||
+    item.id.toLowerCase().includes(searchTerm) ||
+    item.symbol.toLowerCase().includes(searchTerm)
+  );
 
-    if (element.profession === "developer") {
-      console.log(element);
-    }
+  renderTable(filteredData);
+});
 
-  });
-}
+// Sort functionality
+const sortButton = document.getElementById('sortButton-mkt-cap');
+sortButton.addEventListener('click', () => {
+  // Sort the data by market cap in descending order
+  const sortedData = responseData.sort((a, b) => b.market_cap - a.market_cap);
 
-function addData() {
-  //Write your code here, just console.log
+  renderTable(sortedData);
+});
 
-  // {id:4,name:"susan",age:"20",profession:"intern"} 
+// Sort functionality
+const sortButton_percentage = document.getElementById('sortButton-percentage');
+sortButton_percentage.addEventListener('click', () => {
+  // Sort the data by percentage in descending order
+  const sortedData = responseData.sort((a, b) => b.market_cap_change_percentage_24h - a.market_cap_change_percentage_24h);
 
-  arr.push({id:4,name:"susan",age:"20",profession:"intern"});
-  console.log(arr[3]);
-}
-
-function removeAdmin() {
-  //Write your code here, just console.log
- 
-  const newArr = [];
-
-  arr.forEach((element) => {
-
-    if (element.profession !== "admin") {
-      newArr.push(element);
-    }
-
-  });
-  
-  console.log(newArr);
-}
-
-function concatenateArray() {
-  //Write your code here, just console.log
-
-  let newArr = [
-    {id:4,name:"yusuf",age:"25",profession:"backend-developer"},
-    {id:5,name:"suboor",age:"28",profession:"frontend-developer"},
-    {id:6,name:"saim",age:"23",profession:"intern"}
-  ];
-
-  // now concat it with arr
-
-  const concatArr = [...arr, ...newArr];
-
-  console.log(concatArr);
-}
+  renderTable(sortedData);
+});

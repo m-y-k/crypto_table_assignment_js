@@ -1,24 +1,50 @@
-<!-- @format -->
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <button onclick="PrintDeveloperbyMap()">
-      Console log Students with Map
-    </button>
-    <button onclick="PrintDeveloperbyForEach()">
-      Console log Students with foreach
-    </button>
-    <button onclick="addData()">Console New Data with 4th Employee</button>
-    <button onclick="removeAdmin()">Remove Admin</button>
-    <button onclick="concatenateArray()">concatenateArray</button>
+<html>
+<head>
+  <title>Crypto Market Data</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #cryptoTable{
+      margin-left: 10%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    #main-container{
+      background-color: black;
+    }
+    .text-color{
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="main-container">
+  <!-- <h1>Crypto Market Data</h1> -->
+  <input type="text" id="searchInput" placeholder="Search By Name or Symbol">
+  <button id="searchButton">Search</button>
+  <button id="sortButton-mkt-cap">Sort by Market Cap</button>.
+  <button id="sortButton-percentage">Sort by percentage</button>
 
-    <script src="./script.js"></script>
-  </body>
+  <table id="cryptoTable" class="text-color">
+    <!-- <thead>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Symbol</th>
+        <th>Price (USD)</th>
+        <th>Total Volume</th>
+      </tr>
+    </thead> -->
+    <tbody id="cryptoTableBody">
+    </tbody>
+  </table>
+</div>
+  <script src="script.js"></script>
+</body>
 </html>
