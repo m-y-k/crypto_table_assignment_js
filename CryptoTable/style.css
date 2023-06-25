@@ -1,0 +1,39 @@
+body{
+    background-color: black;
+    color: white;
+    font-family: monospace;
+    text-align: center;
+}
+table{
+    border-collapse: collapse;
+}
+input{
+    background-color: black;
+    color: white;width: 30%;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid blueviolet;
+}
+button{
+    background-color: black;
+    color: grey;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid rgb(226, 43, 186);
+}
+#cryptoTable{
+    margin-inline: auto;
+}
+td{
+    /* width: 100%; */
+    border-bottom: 1px solid grey;
+    padding: 10px;
+}
+.neg_class{
+    color: red;
+}
+.pos_class{
+    color: greenyellow;
+}
